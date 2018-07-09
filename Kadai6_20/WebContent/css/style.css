@@ -1,0 +1,55 @@
+.idtext{
+	width:180px;
+	}
+
+.passtext{
+	width:200px;
+	}
+
+.Toptitle{
+	text-align: center;
+	}
+
+body{
+	 height:100vh;
+     position: relative;
+     background-color: #A9BCF5;
+     }
+
+.Top{
+	position: absolute;
+	top: 50%; left:50%;
+	transform: translate(-50%,-50%);
+}
+
+.table{
+	width:"80%";
+	min-width:"800px"
+}
+
+#menu ul{
+margin: 0;
+padding: 0;
+list-style: none;
+}
+#menu li{
+display: inline;
+padding: 0;
+margin: 0;
+}
+#menu li a{
+display: block;
+border: 1px solid #9F99A3;
+background-color: #6E6E6E;
+padding: 3px 10px;
+text-decoration: none;
+color: #333;
+width: 150px;
+margin: 2px 0px;
+text-align: left;
+font-size: 14px;
+}
+#menu li a:hover{
+border: 1px solid #8593A9;
+background-color: #BDBDBD;
+}
