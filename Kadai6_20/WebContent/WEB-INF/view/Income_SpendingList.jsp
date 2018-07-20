@@ -40,8 +40,8 @@
 
 <div id="menu" color="#6E6E6E">
 <ul>
-<li><a href="#">収入</a></li>
-<li><a href="#">支出</a></li>
+<li><a href="/Kadai6_20/Income">収入</a></li>
+<li><a href="/Kadai6_20/Spending">支出</a></li>
 <li><a href="#">検索</a></li>
 <li><a href="#">収支合計表示</a></li>
 </ul>
