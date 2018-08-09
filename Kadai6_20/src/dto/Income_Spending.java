@@ -17,6 +17,14 @@ public class Income_Spending {
 		this.money = money;
 	}
 
+	public Income_Spending(int income_spending_kindid, String date, int income_spending_typeid,
+			int money) {
+		this.income_spending_kindid = income_spending_kindid;
+		this.date = date;
+		this.income_spending_typeid = income_spending_typeid;
+		this.money = money;
+	}
+
 	public Income_Spending(){
 
 	}
