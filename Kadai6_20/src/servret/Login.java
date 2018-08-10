@@ -30,6 +30,14 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		request.setAttribute("incomeList",BookKeepingDao.incomeList());
+		request.setCharacterEncoding("UTF-8");
+		request.setAttribute("spendingList",BookKeepingDao.spendingList());
+
+		String view = "/WEB-INF/view/Income_SpendingList.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 
 	}
 

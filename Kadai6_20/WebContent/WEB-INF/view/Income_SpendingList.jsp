@@ -39,7 +39,13 @@
 <td><%=il.getDate() %></td>
 <td><%=il.getIncome_spending_type() %></td>
 <td><%=il.getMoney() %></td>
-<td></td>
+<td>
+<form action="/Kadai6_20/Delete" method="post">
+			<%int a = il.getIncome_spending_id(); %>
+			<input type="hidden" name="Income_spending_id" value="<%= a %>" >
+			<input type="submit" value="×">
+</form>
+</td>
 
         <%
         }
@@ -66,7 +72,13 @@
 <td><%=sl.getDate() %></td>
 <td><%=sl.getIncome_spending_type() %></td>
 <td><%=sl.getMoney() %></td>
-<td></td>
+<td>
+<form action="/Kadai6_20/Delete" method="post">
+			<%int a = sl.getIncome_spending_id(); %>
+			<input type="hidden" name="Income_spending_id" value="<%= a %>" >
+			<input type="submit" value="×">
+</form>
+</td>
 
         <%
         }

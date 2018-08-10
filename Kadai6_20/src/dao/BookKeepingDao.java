@@ -150,7 +150,7 @@ public class BookKeepingDao {
 					"root",
 					"sogekingM0712");
 
-			String sql = "SELECT kind.kindname, income_spending.date, type.typename ,income_spending.money  "
+			String sql = "SELECT income_spending.income_spending_id, kind.kindname, income_spending.date, type.typename ,income_spending.money  "
 					+ "FROM (income_spending INNER JOIN kind on income_spending.income_spending_kindid = kind.kindid ) "
 					+ "INNER JOIN type ON income_spending.income_spending_typeid = type.typeid and income_spending.income_spending_kindid = 1";
 
@@ -159,12 +159,13 @@ public class BookKeepingDao {
 
 			while(rs.next() == true){
 
+				int income_spending_id = rs.getInt("income_spending_id");
 				String kindid = rs.getString("kindname");
 				String date = rs.getString("date");
 				String typeid = rs.getString("typename");
 				int money = rs.getInt("money");
 
-				incomeList.add(new Income_Spending(kindid,date,typeid,money));
+				incomeList.add(new Income_Spending(income_spending_id,kindid,date,typeid,money));
 			}
 
 		} catch (SQLException e){
@@ -223,7 +224,7 @@ public class BookKeepingDao {
 						"root",
 						"sogekingM0712");
 
-				String sql = "SELECT kind.kindname, income_spending.date, type.typename ,income_spending.money  "
+				String sql = "SELECT income_spending.income_spending_id, kind.kindname, income_spending.date, type.typename ,income_spending.money  "
 						+ "FROM (income_spending INNER JOIN kind on income_spending.income_spending_kindid = kind.kindid ) "
 						+ "INNER JOIN type ON income_spending.income_spending_typeid = type.typeid and income_spending.income_spending_kindid = 2";
 
@@ -232,12 +233,13 @@ public class BookKeepingDao {
 
 				while(rs.next() == true){
 
+					int income_spending_id = rs.getInt("income_spending_id");
 					String kindid = rs.getString("kindname");
 					String date = rs.getString("date");
 					String typeid = rs.getString("typename");
 					int money = rs.getInt("money");
 
-					spendingList.add(new Income_Spending(kindid,date,typeid,money));
+					spendingList.add(new Income_Spending(income_spending_id,kindid,date,typeid,money));
 				}
 
 			} catch (SQLException e){
@@ -272,5 +274,63 @@ public class BookKeepingDao {
 				}
 			}
 			return spendingList;
+		}
+
+
+		//収支レコード削除メソッド
+		public static void deleteIncome_spending(int income_spending_id){
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+
+			try{
+
+				Class.forName("com.mysql.jdbc.Driver");
+
+				con = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/bookkeeping?useSSL=false",
+						"root",
+						"sogekingM0712");
+
+				String sql = "DELETE FROM income_spending WHERE income_spending_id = ?";
+
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setInt(1,income_spending_id);
+
+				pstmt.executeUpdate();
+
+
+			} catch (SQLException e){
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if( pstmt!= null){
+						pstmt.close();
+					}
+				} catch(SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+				try {
+					if( pstmt != null){
+						pstmt.close();
+					}
+				} catch(SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+
+				try {
+					if( con != null){
+						con.close();
+					}
+				} catch (SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+			}
 		}
 }

@@ -1,6 +1,5 @@
 package servret;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,17 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.BookKeepingDao;
+
 /**
- * Servlet implementation class Top
+ * Servlet implementation class Delete
  */
-@WebServlet("/Top")
-public class Top extends HttpServlet {
+@WebServlet("/Delete")
+public class Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Top() {
+    public Delete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +30,19 @@ public class Top extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String view = "/WEB-INF/view/Top.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
-	}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
+		BookKeepingDao.deleteIncome_spending(Integer.parseInt(request.getParameter("Income_spending_id")));
+
+		String view = "/WEB-INF/view/Delete.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 
 }
