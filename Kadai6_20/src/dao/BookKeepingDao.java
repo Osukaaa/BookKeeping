@@ -150,25 +150,26 @@ public class BookKeepingDao {
 					"root",
 					"sogekingM0712");
 
-			String sql = "SELECT income_spending_kindid,date,income_spending_typeid,money FROM income_spending"
-					+ "WHERE income_spending_kindid = 1";
+			String sql = "SELECT kind.kindname, income_spending.date, type.typename ,income_spending.money  "
+					+ "FROM (income_spending INNER JOIN kind on income_spending.income_spending_kindid = kind.kindid ) "
+					+ "INNER JOIN type ON income_spending.income_spending_typeid = type.typeid and income_spending.income_spending_kindid = 1";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while(rs.next() == true){
 
-				int kindid = rs.getInt("income_spending_kindid");
+				String kindid = rs.getString("kindname");
 				String date = rs.getString("date");
-				int typeid = rs.getInt("income_spending_typeid");
+				String typeid = rs.getString("typename");
 				int money = rs.getInt("money");
 
 				incomeList.add(new Income_Spending(kindid,date,typeid,money));
 			}
 
 		} catch (SQLException e){
-			System.out.println("DB切断時にエラーが発生しました。");
-
+			System.out.println("DB切断時にエラーが発生しました。1");
+			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
@@ -177,7 +178,7 @@ public class BookKeepingDao {
 					rs.close();
 				}
 			} catch(SQLException e){
-				System.out.println("DB切断時にエラーが発生しました。");
+				System.out.println("DB切断時にエラーが発生しました。2");
 				e.printStackTrace();
 			}
 			try {
@@ -185,7 +186,7 @@ public class BookKeepingDao {
 					pstmt.close();
 				}
 			} catch(SQLException e){
-				System.out.println("DB切断時にエラーが発生しました。");
+				System.out.println("DB切断時にエラーが発生しました。3");
 				e.printStackTrace();
 			}
 			try {
@@ -222,17 +223,18 @@ public class BookKeepingDao {
 						"root",
 						"sogekingM0712");
 
-				String sql = "SELECT income_spending_kindid,date,income_spending_typeid,money FROM income_spending"
-						+ "WHERE income_spending_kindid = 2";
+				String sql = "SELECT kind.kindname, income_spending.date, type.typename ,income_spending.money  "
+						+ "FROM (income_spending INNER JOIN kind on income_spending.income_spending_kindid = kind.kindid ) "
+						+ "INNER JOIN type ON income_spending.income_spending_typeid = type.typeid and income_spending.income_spending_kindid = 2";
 
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 
 				while(rs.next() == true){
 
-					int kindid = rs.getInt("income_spending_kindid");
+					String kindid = rs.getString("kindname");
 					String date = rs.getString("date");
-					int typeid = rs.getInt("income_spending_typeid");
+					String typeid = rs.getString("typename");
 					int money = rs.getInt("money");
 
 					spendingList.add(new Income_Spending(kindid,date,typeid,money));

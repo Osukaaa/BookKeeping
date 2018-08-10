@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="dto.Income_Spending"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,11 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-
+<%
+     request.setCharacterEncoding("UTF-8");
+     ArrayList<Income_Spending> incomeList = (ArrayList<Income_Spending>)request.getAttribute("incomeList");
+     ArrayList<Income_Spending> spendingList = (ArrayList<Income_Spending>)request.getAttribute("spendingList");
+%>
 
 
 <table border="1" width="1000px" >
@@ -18,17 +24,26 @@
 <h2>収入一覧</h2>
 <table border="1" width="500px">
 <tr>
-<td>日付</td>
-<td>種類</td>
-<td>金額</td>
-<td>削除</td>
+
+<th>収支</th>
+<th>日付</th>
+<th>種類</th>
+<th>金額</th>
+<th>削除</th>
 </tr>
 
-<td>日付1</td>
-<td>種類1</td>
-<td>金額1</td>
-<td>削除1</td>
+        <%
+			for (Income_Spending il : incomeList) {
+		%>
+<td><%=il.getIncome_spending_kind() %></td>
+<td><%=il.getDate() %></td>
+<td><%=il.getIncome_spending_type() %></td>
+<td><%=il.getMoney() %></td>
+<td></td>
 
+        <%
+        }
+        %>
 </table>
 </td>
 
@@ -37,17 +52,25 @@
 <table border="1" width="500px">
 
 <tr>
-<td>日付</td>
-<td>種類</td>
-<td>金額</td>
-<td>削除</td>
+<th>収支</th>
+<th>日付</th>
+<th>種類</th>
+<th>金額</th>
+<th>削除</th>
 </tr>
 
-<td>日付1</td>
-<td>種類1</td>
-<td>金額1</td>
-<td>削除1</td>
+<%
+			for (Income_Spending sl : spendingList) {
+		%>
+<td><%=sl.getIncome_spending_kind() %></td>
+<td><%=sl.getDate() %></td>
+<td><%=sl.getIncome_spending_type() %></td>
+<td><%=sl.getMoney() %></td>
+<td></td>
 
+        <%
+        }
+        %>
 </table>
 </td>
 </tr>
