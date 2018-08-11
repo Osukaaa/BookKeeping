@@ -333,4 +333,196 @@ public class BookKeepingDao {
 				}
 			}
 		}
+
+
+
+		//収支入力メソッド
+		public static void insertIncome_spending(int kindid,String date,int typeid,int money){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+
+			try{
+
+				Class.forName("com.mysql.jdbc.Driver");
+
+				con = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/bookkeeping?useSSL=false",
+						"root",
+						"sogekingM0712");
+
+				String sql = "INSERT INTO income_spending(income_spending_kindid,date,income_spending_typeid,money) VALUES(?,?,?,?);";
+
+				pstmt = con.prepareStatement(sql);
+
+				pstmt.setInt(1,kindid);
+				pstmt.setString(2,date);
+				pstmt.setInt(3,typeid);
+				pstmt.setInt(4,money);
+
+				pstmt.executeUpdate();
+
+			} catch (SQLException e){
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if( pstmt!= null){
+						pstmt.close();
+					}
+				} catch(SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+				try {
+					if( pstmt != null){
+						pstmt.close();
+					}
+				} catch(SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+
+				try {
+					if( con != null){
+						con.close();
+					}
+				} catch (SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+			}
+		}
+
+
+		//収入種類一覧表示メソッド
+		public static ArrayList<Type> incomeTypeList(){
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<Type> incomeTypeList = new ArrayList<Type>();
+
+			try{
+
+				Class.forName("com.mysql.jdbc.Driver");
+
+				con = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/bookkeeping?useSSL=false",
+						"root",
+						"sogekingM0712");
+
+				String sql = "SELECT typeid,typename FROM type WHERE kindid = 1";
+
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				while(rs.next() == true){
+
+					int typeid = rs.getInt("typeid");
+					String typename = rs.getString("typename");
+
+					incomeTypeList.add(new Type(typeid,typename));
+				}
+
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。1");
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if( rs != null){
+						rs.close();
+					}
+				} catch(SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。2");
+					e.printStackTrace();
+				}
+				try {
+					if( pstmt != null){
+						pstmt.close();
+					}
+				} catch(SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。3");
+					e.printStackTrace();
+				}
+				try {
+					if( con != null){
+						con.close();
+					}
+				} catch (SQLException e){
+					System.out.println("DB切断時にエラーが発生しました。");
+					e.printStackTrace();
+				}
+			}
+			return incomeTypeList;
+		}
+
+
+
+
+		//支出種類一覧表示メソッド
+				public static ArrayList<Type> spendingTypeList(){
+
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					ArrayList<Type> spendingTypeList = new ArrayList<Type>();
+
+					try{
+
+						Class.forName("com.mysql.jdbc.Driver");
+
+						con = DriverManager.getConnection(
+								"jdbc:mysql://localhost:3306/bookkeeping?useSSL=false",
+								"root",
+								"sogekingM0712");
+
+						String sql = "SELECT typeid,typename FROM type WHERE kindid = 2";
+
+						pstmt = con.prepareStatement(sql);
+						rs = pstmt.executeQuery();
+
+						while(rs.next() == true){
+
+							int typeid = rs.getInt("typeid");
+							String typename = rs.getString("typename");
+
+							spendingTypeList.add(new Type(typeid,typename));
+						}
+
+					} catch (SQLException e){
+						System.out.println("DB切断時にエラーが発生しました。1");
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							if( rs != null){
+								rs.close();
+							}
+						} catch(SQLException e){
+							System.out.println("DB切断時にエラーが発生しました。2");
+							e.printStackTrace();
+						}
+						try {
+							if( pstmt != null){
+								pstmt.close();
+							}
+						} catch(SQLException e){
+							System.out.println("DB切断時にエラーが発生しました。3");
+							e.printStackTrace();
+						}
+						try {
+							if( con != null){
+								con.close();
+							}
+						} catch (SQLException e){
+							System.out.println("DB切断時にエラーが発生しました。");
+							e.printStackTrace();
+						}
+					}
+					return spendingTypeList;
+				}
 }
