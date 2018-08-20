@@ -337,7 +337,7 @@ public class BookKeepingDao {
 
 
 		//収支入力メソッド
-		public static void insertIncome_spending(int kindid,String date,int typeid,int money){
+		public static void insertIncome_spending(int kindid, String date, int typeid, int money){
 			Connection con = null;
 			PreparedStatement pstmt = null;
 
@@ -525,4 +525,6 @@ public class BookKeepingDao {
 					}
 					return spendingTypeList;
 				}
+
+
 }

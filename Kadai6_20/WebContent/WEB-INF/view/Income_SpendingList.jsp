@@ -23,8 +23,8 @@
 <td>
 <h2>収入一覧</h2>
 <table border="1" width="500px">
-<tr>
 
+<tr>
 <th>収支</th>
 <th>日付</th>
 <th>種類</th>
@@ -32,9 +32,11 @@
 <th>削除</th>
 </tr>
 
+
         <%
 			for (Income_Spending il : incomeList) {
 		%>
+		<tr>
 <td><%=il.getIncome_spending_kind() %></td>
 <td><%=il.getDate() %></td>
 <td><%=il.getIncome_spending_type() %></td>
@@ -46,10 +48,11 @@
 			<input type="submit" value="×">
 </form>
 </td>
-
+</tr>
         <%
         }
         %>
+
 </table>
 </td>
 
@@ -68,6 +71,7 @@
 <%
 			for (Income_Spending sl : spendingList) {
 		%>
+		<tr>
 <td><%=sl.getIncome_spending_kind() %></td>
 <td><%=sl.getDate() %></td>
 <td><%=sl.getIncome_spending_type() %></td>
@@ -79,7 +83,7 @@
 			<input type="submit" value="×">
 </form>
 </td>
-
+</tr>
         <%
         }
         %>

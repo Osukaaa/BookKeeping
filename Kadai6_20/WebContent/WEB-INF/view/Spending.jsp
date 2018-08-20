@@ -17,7 +17,7 @@ ArrayList<Type> spendingTypeList = (ArrayList<Type>)request.getAttribute("spendi
 
 <div class= "Top">
 <h1 class="Toptitle">支出</h1>
-<form action="/Kadai6_20/" method="post">
+<form action="/Kadai6_20/Spending_Insert" method="post">
 
 <select name="year">
         <option value="2018年">2018年</option>
@@ -84,7 +84,7 @@ ArrayList<Type> spendingTypeList = (ArrayList<Type>)request.getAttribute("spendi
 			for (Type sTL : spendingTypeList) {
 		%>
 
-        <option value="<%= sTL.getTypename() %>"> <%= sTL.getTypename() %> </option>
+        <option value="<%= sTL.getTypeid() %>"> <%= sTL.getTypename() %> </option>
 
 
         <%
@@ -92,6 +92,7 @@ ArrayList<Type> spendingTypeList = (ArrayList<Type>)request.getAttribute("spendi
         %>
 
 </select>
+金額:<input type="text" name="money"  placeholder="半角数字で入力">
 		<input type="submit" value="入力">
 </form>
 

@@ -17,7 +17,7 @@ ArrayList<Type> incomeTypeList = (ArrayList<Type>)request.getAttribute("incomeTy
 
 <div class= "Top">
 <h1 class="Toptitle">収入</h1>
-<form action="/Kadai6_20/" method="post">
+<form action="/Kadai6_20/Income_Insert" method="post">
 
 <select name="year">
         <option value="2018年">2018年</option>
@@ -84,7 +84,7 @@ ArrayList<Type> incomeTypeList = (ArrayList<Type>)request.getAttribute("incomeTy
 			for (Type iTL : incomeTypeList) {
 		%>
 
-        <option value="<%= iTL.getTypename() %>"> <%= iTL.getTypename() %> </option>
+        <option value="<%= iTL.getTypeid() %>"> <%= iTL.getTypename() %> </option>
 
 
         <%
@@ -92,6 +92,7 @@ ArrayList<Type> incomeTypeList = (ArrayList<Type>)request.getAttribute("incomeTy
         %>
 
 </select>
+金額:<input type="text" name="money"  placeholder="半角数字で入力">
 		<input type="submit" value="入力">
 </form>
 
