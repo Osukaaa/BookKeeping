@@ -44,7 +44,7 @@ public class Income_Insert extends HttpServlet {
 
 		BookKeepingDao.insertIncome_spending(1, date.toString() , Integer.parseInt(request.getParameter("type")), Integer.parseInt(request.getParameter("money")));
 
-		String view = "/WEB-INF/view/Income_SpendingList.jsp";
+		String view = "/WEB-INF/view/Income_Insert.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 	}
